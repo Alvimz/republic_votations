@@ -1,5 +1,5 @@
 from person import Person
-from random import choice,randint,random,uniform
+from random import choice,uniform
 from typing import List
 
 class CreateVotation:
@@ -26,6 +26,7 @@ class CreateVotation:
         return self.total_white_votes    
     
     def show_results(self):
+        print('Resultados da eleição!')
         for canditato in self.persons:
             print(f'{canditato.name} - {canditato.partido} - {canditato.number_votes}')
         print(f'Total de votos brancos: {self.total_white_votes}')
@@ -39,5 +40,5 @@ if __name__ == '__main__':
     votacao.create_persons_list(gabriel)
     votacao.create_persons_list(dilma)
     votacao.create_persons_list(aecio)
-    votacao.make_votations(10000)
+    votacao.make_votations(100000)
     votacao.show_results()
