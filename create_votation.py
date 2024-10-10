@@ -5,34 +5,34 @@ class CreateVotation:
     
     def __init__(self) -> None:
         self.persons = list()
-        self.calculate_white_votes = 0
+        self.total_white_votes = 0
+        self.no_voted = 0
         
     def create_persons_list(self,persona:Person):
         self.persons.append(persona)
     
-    @staticmethod    
-    def calculate_white_votes(qnt):
+    def calculate_white_votes(self,qnt):
         possibily = uniform(0.01,0.25)
-        return possibily
+        self.total_white_votes=(int(round(possibily*qnt)))
 
         
     def make_votations(self,qnt):
-        white_votes = int(round(self.calculate_white_votes(qnt) * qnt))
-        votes = qnt - white_votes
+        self.calculate_white_votes(qnt)
+        votes_no_white_votes =self.no_voted= qnt - self.total_white_votes
         for candidato in self.persons:
-            
-            votes_candidato = candidato.number_votes=  randint(0,votes)
-            print(candidato.number_votes)
-            votes_candidato-=votes
-            
-        print(f'A porcentagem de votos brancos é: {int(round(white_votes*100/qnt))}%')
-        print(white_votes,votes)
-        return white_votes
+            votes_candidato = randint(0,votes_no_white_votes)
+            candidato.number_votes += votes_candidato
+            votes_no_white_votes-=votes_candidato
+        self.no_voted = votes_no_white_votes
+        return self.total_white_votes,self.no_voted
     
     
     def show_results(self):
         for canditato in self.persons:
             print(f'{canditato.name} - {canditato.partido} - {canditato.number_votes}')
+        print(f'Total de votos brancos: {self.total_white_votes}')
+        print(f'Votos anulados/sem origem: {self.no_voted}')
+
         
             
             
